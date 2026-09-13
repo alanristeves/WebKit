@@ -1,78 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>WebKit</title>
-<link rel="stylesheet" href="main.css?v=final">
-<style>
-body { background: radial-gradient(circle at 50% 28%, #1a0a00 0, #0d0500 44%, #000000 100%) !important; color: #ff6b00 !important; }
-h1 { color: #ff6b00 !important; }
-.btn { background: #1a0a00 !important; border: 2px solid #ff6b00 !important; color: #ffaa44 !important; }
-.text-secondary { color: #cc5500 !important; }
-#top-bar-text { color: #cc5500 !important; }
-</style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WebKit</title>
+    <link rel="stylesheet" href="main.css">
+    <style>
+        body { background: radial-gradient(circle at 50% 28%, #1a0a00 0, #0d0500 44%, #000000 100%) !important; color: #ff6b00 !important; font-family: sans-serif; }
+        h1 { color: #ff6b00 !important; }
+        .btn { background: #1a0a00 !important; border: 2px solid #ff6b00 !important; color: #ffaa44 !important; text-decoration: none; display: inline-block; padding: 10px 20px; border-radius: 4px; font-weight: bold; margin-top: 15px; }
+        .btn:hover { background: #331400 !important; }
+        .btn-disabled { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
+        .text-secondary { color: #cc5500 !important; }
+        #top-bar-text { color: #cc5500 !important; }
+        .text-center { text-align: center; }
+        #fw-status { color: #ff3333; margin-top: 15px; font-weight: bold; }
+    </style>
 </head>
 <body>
-<div class="p-2">
-<h1 class="text-center">Webkit</h1>
-<p class="text-center" id="top-bar-text">Current Firmware: <span class="fw-bold" id="current-fw">Unknown</span></p>
-<p class="text-center text-secondary">POOPS: 7.00-12.00 | P2JB: 12.02-12.70</p>
-</div>
-<div id="main-content">
-<div id="pre-jb-view" class="selected">
-<a tabindex="0" class="btn fw-bold" id="run-jb">Jailbreak</a>
-<p id="fw-status" hidden></p>
-</div>
-</div>
-<div class="position-relative text-center p-2 mb-2">
-<p class="text-secondary">Credits</p>
-<p class="text-secondary mt-2">Jordy, Egy, small dog, dr b, Zeco, Gezine, Echostretch, Ufm42, TheFloW, John Tornblom, Flatz, Idlesauce and PS5 R&amp;D Discord.</p>
-</div>
-<script>
-try {
-var POOPS_HREF = "slopkit/poops.html?go=1&auto=1&production=1&trigger=netcontrol"
-+ "&attempts=8&only=ps0_preflight,ps1_prepare,ps3_stage0,ps4_validate,"
-+ "ps5_stage1,ps6_stage2,ps8_stage3,ps9_stage4,ps10_stage5&log=debug"
-+ "&payload=1&v=final";
-var P2JB_HREF = "slopkit/p2jb.html?go=1&auto=1&production=1&log=debug"
-+ "&payload=1&v=final";
-var POOPS_FIRMWARES = [
-  "7.00", "7.01", "7.20", "7.40", "7.60", "7.61",
-  "8.00", "8.20", "8.40", "8.60",
-  "9.00", "9.05", "9.20", "9.40", "9.60",
-  "10.00", "10.01", "10.20", "10.40", "10.60",
-  "11.00", "11.20", "11.40", "11.60", "12.00"
-];
-var P2JB_FIRMWARES = [
-  "12.02", "12.20", "12.40", "12.60", "12.70"
-];
-var ua = navigator.userAgent;
-var fwStr = "";
-var marker = "PlayStation 5/";
-var idx = ua.indexOf(marker);
-if (idx >= 0) {
-  fwStr = ua.substring(idx + marker.length).split(" ")[0].split(";")[0].split(")")[0];
-}
-var el = document.getElementById("current-fw");
-el.textContent = fwStr || "Not detected";
-var jbButton = document.getElementById("run-jb");
-var fwStatus = document.getElementById("fw-status");
-var href = "";
-if (POOPS_FIRMWARES.indexOf(fwStr) !== -1) href = POOPS_HREF;
-else if (P2JB_FIRMWARES.indexOf(fwStr) !== -1) href = P2JB_HREF;
-if (href) {
-  jbButton.setAttribute("href", href);
-  try { jbButton.focus(); } catch (e) { }
-} else {
-  jbButton.classList.add("btn-disabled");
-  jbButton.setAttribute("aria-disabled", "true");
-  fwStatus.hidden = false;
-  fwStatus.textContent = "Unsupported firmware"
-  + (fwStr ? ": " + fwStr : "")
-  + ". Supported: 7.00-12.00 (Poopsploit), 12.02-12.70 (P2JB).";
-}
-} catch (e) { }
-</script>
+
+    <div class="p-2">
+        <h1 class="text-center">WebKit</h1>
+        <p class="text-center" id="top-bar-text">Current Firmware: <span class="fw-bold" id="current-fw">Unknown</span></p>
+        <p class="text-center text-secondary">POOPS: 7.00-12.00 | P2JB: 12.02-12.70</p>
+    </div>
+
+    <!-- 1️⃣ AQUI FICA O DESENHO DO BOTÃO (HTML) -->
+    <div id="main-content" class="text-center">
+        <div id="pre-jb-view" class="selected">
+            <a href="#" tabindex="0" class="btn fw-bold" id="run-jb">Iniciando Automaticamente...</a>
+            <p id="fw-status" hidden></p>
+        </div>
+    </div>
+
+    <div class="position-relative text-center p-2 mb-2" style="margin-top: 40px;">
+        <p class="text-secondary">Credits</p>
+        <p class="text-secondary mt-2">Jordy, Egy, small dog, dr b, Zeco, Gezine, Echostretch, Ufm42, TheFloW, John Tornblom, Flatz, Idlesauce and PS5 R&amp;D Discord.</p>
+    </div>
+
+    <!-- 2️⃣ AQUI EMBAIXO FICA A MÁGICA AUTOMÁTICA (JAVASCRIPT) -->
+    <script>
+    try {
+        var POOPS_HREF = "slopkit/poops.html?go=1&auto=1&production=1&trigger=netcontrol"
+        + "&attempts=8&only=ps0_preflight,ps1_prepare,ps3_stage0,ps4_validate,"
+        + "ps5_stage1,ps6_stage2,ps8_stage3,ps9_stage4,ps10_stage5&log=debug"
+        + "&payload=../ProsperoMgr.elf&v=final";
+
+        var P2JB_HREF = "slopkit/p2jb.html?go=1&auto=1&production=1&log=debug"
+        + "&payload=../ProsperoMgr.elf&v=final";
+
+        var POOPS_FIRMWARES = [
+          "7.00", "7.01", "7.20", "7.40", "7.60", "7.61",
+          "8.00", "8.20", "8.40", "8.60",
+          "9.00", "9.05", "9.20", "9.40", "9.60",
+          "10.00", "10.01", "10.20", "10.40", "10.60",
+          "11.00", "11.20", "11.40", "11.60", "12.00"
+        ];
+        var P2JB_FIRMWARES = [
+          "12.02", "12.20", "12.40", "12.60", "12.70"
+        ];
+
+        var ua = navigator.userAgent;
+        var fwStr = "";
+        var marker = "PlayStation 5/";
+        var idx = ua.indexOf(marker);
+
+        // Descobre a versão do seu PS5
+        if (idx >= 0) {
+          var rawFw = ua.substring(idx + marker.length);
+          fwStr = rawFw.split(" ")[0].split(";")[0].split(")")[0];
+        }
+
+        var el = document.getElementById("current-fw");
+        el.textContent = fwStr || "Not detected";
+
+        var jbButton = document.getElementById("run-jb");
+        var fwStatus = document.getElementById("fw-status");
+        var href = "";
+
+        if (POOPS_FIRMWARES.indexOf(fwStr) !== -1) {
+          href = POOPS_HREF;
+        } else if (P2JB_FIRMWARES.indexOf(fwStr) !== -1) {
+          href = P2JB_HREF;
+        }
+
+        if (href) {
+          // Prepara o botão com o link certo e o payload do ProsperoMgr
+          jbButton.setAttribute("href", href);
+          try { jbButton.focus(); } catch (e) { }
+          
+          // 🤖 O DEDO INVISÍVEL: Espera 1 segundo e clica no botão sozinho!
+          setTimeout(function() {
+            jbButton.click();
+          }, 1000);
+
+        } else {
+          // Se abrir no PC ou firmware não aceito, desativa o botão de forma limpa
+          jbButton.textContent = "Jailbreak";
+          jbButton.classList.add("btn-disabled");
+          jbButton.setAttribute("aria-disabled", "true");
+          jbButton.removeAttribute("href"); 
+          fwStatus.hidden = false;
+          fwStatus.textContent = "Unsupported firmware"
+          + (fwStr ? ": " + fwStr : "")
+          + ". Supported: 7.00-12.00 (Poopsploit), 12.02-12.70 (P2JB).";
+        }
+    } catch (e) { }
+    </script>
 </body>
 </html>
