@@ -20,9 +20,9 @@ h1 { color: #ff6b00 !important; }
 <p class="text-center text-secondary">POOPS: 7.00-12.00 | P2JB: 12.02-12.70</p>
 </div>
 <div id="main-content">
-    <div id="pre-jb-view" class="selected">
-        <p id="fw-status">Detecting firmware...</p>
-    </div>
+<div id="pre-jb-view" class="selected">
+<p id="fw-status">Detecting firmware...</p>
+</div>
 </div>
 <div class="position-relative text-center p-2 mb-2">
 <p class="text-secondary">Credits</p>
@@ -61,11 +61,8 @@ if (POOPS_FIRMWARES.indexOf(fwStr) !== -1) href = POOPS_HREF;
 else if (P2JB_FIRMWARES.indexOf(fwStr) !== -1) href = P2JB_HREF;
 if (href) {
   fwStatus.hidden = false;
-  fwStatus.textContent =
-    "Firmware " + fwStr + " detected. Ready to continue.";
+  fwStatus.textContent = "Firmware " + fwStr + " detected. Ready to continue.";
 } else {
-  jbButton.classList.add("btn-disabled");
-  jbButton.setAttribute("aria-disabled", "true");
   fwStatus.hidden = false;
   fwStatus.textContent = "Unsupported firmware"
   + (fwStr ? ": " + fwStr : "")
