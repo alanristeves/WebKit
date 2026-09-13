@@ -21,13 +21,13 @@
 
     <div class="p-2">
         <h1 class="text-center">WebKit</h1>
-        <p class="text-center" id="top-bar-text">Current Firmware: <span class="fw-bold" id="current-fw">Unknown</span></p>
+        <p class="text-center" id="top-bar-text">Current Firmware: <span class="fw-bold" id="current-fw">Detecting...</span></p>
         <p class="text-center text-secondary">POOPS: 7.00-12.00 | P2JB: 12.02-12.70</p>
     </div>
 
     <div id="main-content" class="text-center">
         <div id="pre-jb-view" class="selected">
-            <a href="#" tabindex="0" class="btn fw-bold" id="run-jb">Iniciando Automaticamente...</a>
+            <a href="#" tabindex="0" class="btn fw-bold" id="run-jb">Jailbreak</a>
             <p id="fw-status" hidden></p>
         </div>
     </div>
@@ -61,44 +61,52 @@
         var ua = navigator.userAgent;
         var fwStr = "";
         
-        // 🛠️ NOVO SISTEMA DE LEITURA: Extrai a versão sem usar o .split() encadeado que quebrava o script
+        // 🛠️ CORREÇÃO DO LOOP: Captura e extrai o número do firmware corretamente
         var match = ua.match(/PlayStation 5\/([0-9.]+)/);
         if (match && match[1]) {
             fwStr = match[1];
         }
 
         var el = document.getElementById("current-fw");
-        el.textContent = fwStr || "Not detected";
-
         var jbButton = document.getElementById("run-jb");
         var fwStatus = document.getElementById("fw-status");
         var href = "";
 
-        if (POOPS_FIRMWARES.indexOf(fwStr) !== -1) {
-          href = POOPS_HREF;
-        } else if (P2JB_FIRMWARES.indexOf(fwStr) !== -1) {
-          href = P2JB_HREF;
-        }
+        if (fwStr) {
+            el.textContent = fwStr;
+            
+            // Verifica se o firmware do PS5 está nas listas suportadas
+            if (POOPS_FIRMWARES.indexOf(fwStr) !== -1) {
+                href = POOPS_HREF;
+            } else if (P2JB_FIRMWARES.indexOf(fwStr) !== -1) {
+                href = P2JB_HREF;
+            }
 
-        if (href) {
-          jbButton.setAttribute("href", href);
-          try { jbButton.focus(); } catch (e) { }
-          
-          // Dispara o clique automático após 1 segundo
-          setTimeout(function() {
-            jbButton.click();
-          }, 1000);
-
+            if (href) {
+                jbButton.setAttribute("href", href);
+                jbButton.textContent = "Iniciando Automaticamente...";
+                try { jbButton.focus(); } catch (e) { }
+                
+                // 🤖 DISPARO AUTOMÁTICO: Entra no Jailbreak sozinho após 1 segundo
+                setTimeout(function() {
+                    jbButton.click();
+                }, 1000);
+            } else {
+                // PS5 com firmware não suportado
+                jbButton.textContent = "Jailbreak Desativado";
+                jbButton.classList.add("btn-disabled");
+                jbButton.removeAttribute("href");
+                fwStatus.hidden = false;
+                fwStatus.textContent = "Unsupported firmware: " + fwStr + ". Supported: 7.00-12.00 / 12.02-12.70";
+            }
         } else {
-          // Se abrir no PC ou firmware não suportado, interrompe e avisa de forma limpa
-          jbButton.textContent = "Jailbreak";
-          jbButton.classList.add("btn-disabled");
-          jbButton.setAttribute("aria-disabled", "true");
-          jbButton.removeAttribute("href"); 
-          fwStatus.hidden = false;
-          fwStatus.textContent = "Unsupported firmware"
-          + (fwStr ? ": " + fwStr : "")
-          + ". Supported: 7.00-12.00 (Poopsploit), 12.02-12.70 (P2JB).";
+            // Se abrir no PC ou Celular (Não detectou PS5)
+            el.textContent = "Not a PS5";
+            jbButton.textContent = "Jailbreak (Apenas no PS5)";
+            jbButton.classList.add("btn-disabled");
+            jbButton.removeAttribute("href");
+            fwStatus.hidden = false;
+            fwStatus.textContent = "Aviso: Abra esta página diretamente pelo navegador do seu PlayStation 5 para iniciar.";
         }
     } catch (e) { }
     </script>
