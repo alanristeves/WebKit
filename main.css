@@ -1,90 +1,159 @@
-  font-size: 17px;
+font-size: 17px; 
+} 
+
+/* Definição das cores baseadas no PS5 */
+:root {
+    --bg-dark: #0a0f18;          /* O preto azulado profundo do centro do console */
+    --surface-white: #f5f7fa;    /* O branco fosco das placas laterais */
+    --ps-blue: #00439c;          /* O azul clássico da marca PlayStation */
+    --ps-neon-blue: #00b2ff;     /* O azul brilhante dos LEDs de inicialização */
+    --text-light: #ffffff;
+    --text-muted: #8f9cae;
 }
 
-body {
-  user-select: none;
-  -webkit-user-select: none;
-  background-color: var(--background-color-primary);
-  color: var(--text-color-primary);
-  font-family: Arial, sans-serif;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  height: 100vh;
-  padding: 0;
-  margin: 0;
-  overflow: hidden;
-  box-sizing: border-box;
+body { 
+    user-select: none; 
+    -webkit-user-select: none; 
+    background-color: var(--bg-dark); 
+    color: var(--text-light); 
+    font-family: 'Segoe UI', Inter, Arial, sans-serif; /* Fontes mais modernas */
+    display: grid; 
+    grid-template-rows: auto 1fr auto; 
+    height: 100vh; 
+    padding: 0; 
+    margin: 0; 
+    overflow: hidden; 
+    box-sizing: border-box; 
+} 
+
+a { 
+    color: var(--ps-neon-blue); 
+    text-decoration: none;
+    transition: color 0.2s ease;
+} 
+
+a:hover {
+    color: var(--text-light);
 }
 
-a { color: var(--text-color-secondary); }
-a:active, a:focus { outline: 0; border: none; }
+a:active, a:focus { 
+    outline: 0; 
+    border: none; 
+} 
 
-.btn {
-  padding: 1rem 2rem;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  margin: .2rem;
-  cursor: pointer;
-  line-height: 2.5rem;
-  min-width: 5rem;
-  border-radius: 1.25rem;
-  width: 50%;
-  background-color: var(--surface-color-primary);
-  border: none;
-  color: var(--text-color-primary);
-  font-size: 1.3rem;
-  transition: background-color .25s ease;
-  box-sizing: border-box;
+/* Botão Moderno Estilo PS5 (Branco com texto escuro) */
+.btn { 
+    padding: 0.8rem 2rem; 
+    text-align: center; 
+    text-decoration: none; 
+    display: inline-block; 
+    margin: .5rem; 
+    cursor: pointer; 
+    line-height: 2rem; 
+    min-width: 5rem; 
+    border-radius: 2rem; /* Bordas mais ovais e modernas */
+    width: 50%; 
+    background-color: var(--surface-white); 
+    border: 2px solid transparent; 
+    color: #04060a; /* Texto escuro para contrastar com o botão branco */
+    font-size: 1.1rem; 
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all .3s cubic-bezier(0.25, 0.8, 0.25, 1); 
+    box-sizing: border-box; 
+} 
+
+/* Efeito de Brilho Azul do LED ao passar o mouse */
+.btn:hover, .btn:focus { 
+    background-color: var(--bg-dark); 
+    color: var(--text-light); 
+    border-color: var(--ps-neon-blue);
+    box-shadow: 0 0 15px var(--ps-neon-blue); /* Efeito neon */
+} 
+
+/* Botão Secundário (Estilo o painel preto do PS5) */
+.btn-secondary { 
+    padding: .5rem 2rem; 
+    font-size: 0.9rem; 
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-light);
+} 
+
+.btn-secondary:hover {
+    background-color: var(--ps-blue);
+    border-color: var(--ps-blue);
+    box-shadow: 0 0 10px var(--ps-blue);
 }
 
-.btn:hover, .btn:focus {
-  background-color: var(--surface-color-hover);
-  color: var(--text-color-primary-hover);
-}
+#main-content { 
+    position: relative; 
+    box-sizing: border-box; 
+} 
 
-.btn-secondary { padding: .5rem 2rem; font-size: 1rem; }
+#main-content > div { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    opacity: 0; 
+    pointer-events: none; 
+    transition: opacity .3s ease-in-out; 
+    box-sizing: border-box; 
+    display: flex; 
+} 
 
-#main-content { position: relative; box-sizing: border-box; }
-#main-content > div {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity .3s ease-in-out;
-  box-sizing: border-box;
-  display: flex;
-}
+#pre-jb-view { 
+    display: block !important; 
+    padding-top: 18vh; 
+    text-align: center; 
+} 
 
-#pre-jb-view {
-  display: block !important;
-  padding-top: 18vh;
-  text-align: center;
-}
+#pre-jb-view .btn { 
+    display: block; 
+    width: 70%; 
+    max-width: 400px; /* Evita que o botão fique gigante em telas grandes */
+    margin: .8rem auto; 
+} 
 
-#pre-jb-view .btn {
-  display: block;
-  width: 70%;
-  max-width: none;
-  margin: .5rem auto;
-}
+.selected { 
+    opacity: 1 !important; 
+    pointer-events: auto !important; 
+} 
 
-.selected { opacity: 1 !important; pointer-events: auto !important; }
-.position-relative { position: relative; }
-.text-center { text-align: center; }
-.fw-bold { font-weight: 800; }
-.text-secondary {
-  color: var(--text-color-secondary);
-  margin: 0;
-  padding: 0;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  font-size: .8rem;
+.position-relative { 
+    position: relative; 
+} 
+
+.text-center { 
+    text-align: center; 
+} 
+
+.fw-bold { 
+    font-weight: 800; 
+    letter-spacing: 0.5px;
+} 
+
+.text-secondary { 
+    color: var(--text-muted); 
+    margin: 0; 
+    padding: 0; 
+    text-overflow: ellipsis; 
+    overflow: hidden; 
+    white-space: nowrap; 
+    font-size: .85rem; 
+} 
+
+.p-2 { 
+    padding: .5rem !important; 
+} 
+
+.mt-2 { 
+    margin-top: .5rem !important; 
+} 
+
+.mb-2 { 
+    margin-bottom: .5rem !important; 
 }
-.p-2 { padding: .5rem !important; }
-.mt-2 { margin-top: .5rem !important; }
-.mb-2 { margin-bottom: .5rem !important; }
