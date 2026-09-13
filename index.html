@@ -56,7 +56,7 @@ var fwStr = "";
 var marker = "PlayStation 5/";
 var idx = ua.indexOf(marker);
 if (idx >= 0) {
-  fwStr = ua.substring(idx + marker.length).split(" ")[0].split(";")[0].split(")")[0];
+  fwStr = ua.substring(idx + marker.length).split(" ").split(";").split(")");
 }
 var el = document.getElementById("current-fw");
 el.textContent = fwStr || "Not detected";
