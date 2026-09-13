@@ -1,35 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>WebKit</title>
-    <link rel="stylesheet" href="main.css">
-    <style>
-        body { background: radial-gradient(circle at 50% 28%, #1a0a00 0, #0d0500 44%, #000000 100%) !important; color: #ff6b00 !important; font-family: sans-serif; }
-        h1 { color: #ff6b00 !important; }
-        .btn { background: #1a0a00 !important; border: 2px solid #ff6b00 !important; color: #ffaa44 !important; text-decoration: none; display: inline-block; padding: 10px 20px; border-radius: 4px; font-weight: bold; margin-top: 15px; }
-        .btn:hover { background: #331400 !important; }
-        .btn-disabled { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
-        .text-secondary { color: #cc5500 !important; }
-        #top-bar-text { color: #cc5500 !important; }
-        .text-center { text-align: center; }
-        #fw-status { color: #ff3333; margin-top: 15px; font-weight: bold; }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WebKit</title>
+<link rel="stylesheet" href="main.css?v=final">
+<style>
+body { background: radial-gradient(circle at 50% 28%, #1a0a00 0, #0d0500 44%, #000000 100%) !important; color: #ff6b00 !important; }
+h1 { color: #ff6b00 !important; }
+.btn { background: #1a0a00 !important; border: 2px solid #ff6b00 !important; color: #ffaa44 !important; }
+.text-secondary { color: #cc5500 !important; }
+#top-bar-text { color: #cc5500 !important; }
+</style>
 </head>
 <body>
-
-    <div class="p-2">
-        <h1 class="text-center">WebKit</h1>
-        <p class="text-center" id="top-bar-text">Current Firmware: <span class="fw-bold" id="current-fw">Detecting...</span></p>
-        <p class="text-center text-secondary">POOPS: 7.00-12.00 | P2JB: 12.02-12.70</p>
+<div class="p-2">
+<h1 class="text-center">WebKit</h1>
+<p class="text-center" id="top-bar-text">Current Firmware: <span class="fw-bold" id="current-fw">Unknown</span></p>
+<p class="text-center text-secondary">POOPS: 7.00-12.00 | P2JB: 12.02-12.70</p>
+</div>
+<div id="main-content" class="text-center">
+        <div id="pre-jb-view" class="selected">
+            <a href="#" tabindex="0" class="btn fw-bold" id="run-jb">Iniciando Automaticamente...</a>
+            <p id="fw-status" hidden></p>
+        </div>
     </div>
-</div>
-<div id="main-content">
-<div id="pre-jb-view" class="selected">
-<a tabindex="0" class="btn fw-bold" id="run-jb">Jailbreak</a>
-<p id="fw-status" hidden></p>
-</div>
 </div>
 <div class="position-relative text-center p-2 mb-2">
 <p class="text-secondary">Credits</p>
