@@ -6,23 +6,55 @@
 <title>WebKit PS5</title>
 <link rel="stylesheet" href="main.css?v=final">
 <style>
+/* Fundo e Texto Geral */
 body { 
     background: radial-gradient(circle at 50% 28%, #001f4d 0%, #000b1a 44%, #000000 100%) !important; 
     color: #ffffff !important; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important; /* Letra mais limpa e moderna */
+    line-height: 1.6 !important; /* Melhor espaçamento entre linhas de texto */
 }
+
+/* Título Principal */
 h1 { 
     color: #00439c !important; 
+    font-weight: 700 !important;
+    letter-spacing: -0.5px !important; /* Letras ligeiramente mais juntas, estilo premium */
+    text-shadow: 0 2px 10px rgba(0, 67, 156, 0.3) !important; /* Brilho sutil atrás do título */
 }
+
+/* Botões Estilizados */
 .btn { 
     background: #00439c !important; 
     border: 2px solid #0072ce !important; 
     color: #ffffff !important; 
+    border-radius: 8px !important; /* Cantos suavizados e modernos */
+    padding: 10px 24px !important; /* Mais espaço interno para o botão respirar */
+    font-weight: 600 !important;
+    text-transform: uppercase !important; /* Letras maiúsculas estilo menu de jogo */
+    letter-spacing: 1px !important;
+    box-shadow: 0 4px 15px rgba(0, 114, 206, 0.2) !important; /* Sombra azul brilhante */
+    transition: all 0.3s ease !important; /* Efeito suave ao passar o mouse */
+    cursor: pointer !important;
 }
+
+/* Efeito ao passar o mouse no Botão (Hover) */
+.btn:hover {
+    background: #0072ce !important; /* O botão acende */
+    border-color: #00a3ff !important;
+    box-shadow: 0 0 20px rgba(0, 163, 255, 0.6) !important; /* Brilho neon intenso */
+    transform: translateY(-2px) !important; /* O botão sobe de leve */
+}
+
+/* Textos Secundários e Barra Superior */
 .text-secondary { 
     color: #0072ce !important; 
+    font-weight: 500 !important;
 }
+
 #top-bar-text { 
     color: #0072ce !important; 
+    font-weight: 500 !important;
+    letter-spacing: 0.5px !important;
 }
 </style>
 </head>
